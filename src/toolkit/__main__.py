@@ -1,13 +1,13 @@
 import argparse
 import sys
-from . import calculator
-from . import convert
+
+from . import calculator, convert
+
 
 def main():
     parser = argparse.ArgumentParser(description="CLI Toolkit")
     subpar = parser.add_subparsers(dest="program", required=True)
     
-    # Настройка команд
     calc_parser = subpar.add_parser("calc", help="Калькулятор")
     calc_parser.add_argument("expression", help="Выражение")
     
@@ -20,14 +20,14 @@ def main():
     
     try:
         if args.program == "calc":
-            result = calculator.calculator_expr(args.expression)
+            result = calculator.calculator(args.expression)
             print(result)
             
         elif args.program == "conv":
             result = convert.convert_explicit(args.value, args.unit_from, args.unit_to)
             print(result)
             
-    except Exception as e:
+    except ValueError as e:
         print(f"Ошибка: {e}", file=sys.stderr)
         sys.exit(2)
 

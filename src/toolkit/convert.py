@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 
 
 class ConversionError(Exception):
@@ -22,7 +22,7 @@ UNITS = {
 def convert_explicit(value, from_unit, to_unit):
     try:
         value = Decimal(value)
-    except Exception:
+    except (InvalidOperation, ValueError):
         raise ConversionError("Неверное числовое значение")
 
     if from_unit not in UNITS or to_unit not in UNITS:

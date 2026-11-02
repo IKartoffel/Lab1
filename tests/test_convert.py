@@ -1,5 +1,7 @@
 import pytest
-from toolkit.convert import convert_explicit, ConversionError
+
+from toolkit.convert import ConversionError, convert_explicit
+
 
 def test_length():
     assert convert_explicit("1000", "mm", "m") == 1.0
